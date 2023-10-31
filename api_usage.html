@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #444;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>API Documentation</h1>
+
+<h2>1. Process Image</h2>
+<p>Endpoint to process an image and extract text using OCR.</p>
+<pre>
+<b>Endpoint:</b> /process_image
+<b>Method:</b> POST
+<b>Request Body:</b>
+{
+    "image_data": "base64_encoded_image_or_path"
+}
+<b>Response:</b>
+{
+    "status": "success",
+    "message": "Image processed successfully!",
+    "results": {
+        "lines": [
+            {
+                "text": "extracted_text",
+                "confidence": confidence_value,
+                "bounding_box": bounding_box_coordinates
+            },
+            ...
+        ]
+    }
+}
+</pre>
+
+<h2>2. Process Video</h2>
+<p>Endpoint to process a video and extract text from frames using OCR. Videos longer than the defined MAX_VIDEO_DURATION (default 600 seconds) will be rejected.</p>
+<pre>
+<b>Endpoint:</b> /process_video
+<b>Method:</b> POST
+<b>Request Body:</b>
+{
+    "video_data": "base64_encoded_video_or_path",
+    "frame_stride": optional_frame_stride_value,
+    "num_of_cores": optional_number_of_cores,
+    "return_base64": optional_return_base64_flag
+}
+<b>Response:</b>
+{
+    "status": "success",
+    "message": "Video processed successfully!",
+    "results": [
+        {
+            "frame_number": frame_number,
+            "frame_time": frame_time_in_seconds,
+            "lines": [
+                {
+                    "text": "extracted_text",
+                    "confidence": confidence_value,
+                    "bounding_box": bounding_box_coordinates
+                },
+                ...
+            ]
+        },
+        ...
+    ]
+}
+</pre>
+
+<h2>3. Is Alive</h2>
+<p>Endpoint to check if the service is running and alive.</p>
+<pre>
+<b>Endpoint:</b> /is_alive
+<b>Method:</b> GET
+<b>Response:</b>
+{
+    "status": "success",
+    "message": "Service is alive!"
+}
+</pre>
+
+</body>
+</html>
